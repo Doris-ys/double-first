@@ -9,19 +9,11 @@
     :i18nRender="i18nRender"
     v-bind="settings"
   >
-    <!-- Ads begin
-      广告代码 真实项目中请移除
-      production remove this Ads
-    -->
-    <ads v-if="isProPreviewSite && !collapsed"/>
-    <!-- Ads end -->
-
     <!-- 1.0.0+ 版本 pro-layout 提供 API，
           我们推荐使用这种方式进行 LOGO 和 title 自定义
     -->
     <template v-slot:menuHeaderRender>
       <div>
-        <logo-svg />
         <h1>{{ title }}</h1>
       </div>
     </template>
@@ -46,7 +38,7 @@
     </template>
     <!-- custom footer / 自定义Footer -->
     <template v-slot:footerRender>
-      <global-footer />
+      <!-- <global-footer /> -->
     </template>
     <router-view />
   </pro-layout>
@@ -60,7 +52,7 @@ import { CONTENT_WIDTH_TYPE, SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mu
 
 import defaultSettings from '@/config/defaultSettings'
 import RightContent from '@/components/GlobalHeader/RightContent'
-import GlobalFooter from '@/components/GlobalFooter'
+// import GlobalFooter from '@/components/GlobalFooter'
 import Ads from '@/components/Other/CarbonAds'
 import LogoSvg from '../assets/logo.svg?inline'
 
@@ -69,7 +61,7 @@ export default {
   components: {
     SettingDrawer,
     RightContent,
-    GlobalFooter,
+    // GlobalFooter,
     LogoSvg,
     Ads
   },
@@ -182,4 +174,7 @@ export default {
 
 <style lang="less">
 @import "./BasicLayout.less";
+.ant-pro-sider-menu-logo h1 {
+  margin: 0;
+}
 </style>

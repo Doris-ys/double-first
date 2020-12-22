@@ -6,7 +6,6 @@
     :isMobile="isMobile"
     :handleMediaQuery="handleMediaQuery"
     :handleCollapse="handleCollapse"
-    :i18nRender="i18nRender"
     v-bind="settings"
   >
     <!-- 1.0.0+ 版本 pro-layout 提供 API，
@@ -17,22 +16,12 @@
         <h1>{{ title }}</h1>
       </div>
     </template>
-    <!-- 1.0.0+ 版本 pro-layout 提供 API,
-          增加 Header 左侧内容区自定义
-    -->
-    <template v-slot:headerContentRender>
-      <div>
-        <a-tooltip title="刷新页面">
-          <a-icon type="reload" style="font-size: 18px;cursor: pointer;" @click="() => { $message.info('只是一个DEMO') }" />
-        </a-tooltip>
-      </div>
-    </template>
 
-    <setting-drawer :settings="settings" @change="handleSettingChange">
+    <!-- <setting-drawer :settings="settings" @change="handleSettingChange">
       <div style="margin: 12px 0;">
         This is SettingDrawer custom footer content.
       </div>
-    </setting-drawer>
+    </setting-drawer> -->
     <template v-slot:rightContentRender>
       <right-content :top-menu="settings.layout === 'topmenu'" :is-mobile="isMobile" :theme="settings.theme" />
     </template>
@@ -46,7 +35,7 @@
 
 <script>
 import { SettingDrawer, updateTheme } from '@ant-design-vue/pro-layout'
-import { i18nRender } from '@/locales'
+// import { i18nRender } from '@/locales'
 import { mapState } from 'vuex'
 import { CONTENT_WIDTH_TYPE, SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mutation-types'
 
@@ -134,7 +123,7 @@ export default {
     }
   },
   methods: {
-    i18nRender,
+    // i18nRender,
     handleMediaQuery (val) {
       this.query = val
       if (this.isMobile && !val['screen-xs']) {

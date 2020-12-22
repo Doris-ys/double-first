@@ -11,7 +11,7 @@ export const asyncRouterMap = [
     path: '/',
     name: 'index',
     component: BasicLayout,
-    meta: { title: '' },
+    meta: { title: '平台' },
     redirect: '/datafill/university',
     children: [
     // 数据填报
@@ -26,13 +26,13 @@ export const asyncRouterMap = [
             path: '/datafill/university/:pageNo([1-9]\\d*)?',
             name: 'UniversityDataFill',
             component: () => import('@/views/datafill/university'),
-            meta: { title: '双一流大学数据', keepAlive: false }
+            meta: { title: '双一流大学数据', keepAlive: false, permission: ['UniversityDataFill'] }
           },
           {
             path: '/datafill/subject/:pageNo([1-9]\\d*)?',
             name: 'SubjectDataFill',
             component: () => import('@/views/datafill/subject'),
-            meta: { title: '双一流学科数据', keepAlive: false }
+            meta: { title: '双一流学科数据', keepAlive: false, permission: ['SubjectDataFill'] }
           }
         ]
       },
@@ -48,13 +48,13 @@ export const asyncRouterMap = [
             path: '/datamanage/university/:pageNo([1-9]\\d*)?',
             name: 'UniversityDataManage',
             component: () => import('@/views/datamanage/university'),
-            meta: { title: '双一流大学数据', keepAlive: false }
+            meta: { title: '双一流大学数据', keepAlive: false, permission: ['UniversityDataManage'] }
           },
           {
             path: '/datamanage/subject/:pageNo([1-9]\\d*)?',
             name: 'SubjectDataManage',
             component: () => import('@/views/datamanage/subject'),
-            meta: { title: '双一流学科数据', keepAlive: false }
+            meta: { title: '双一流学科数据', keepAlive: false, permission: ['SubjectDataManage'] }
           }
         ]
       },
@@ -74,7 +74,7 @@ export const asyncRouterMap = [
           }
         ]
       },
-      // 消息中心
+      // 用户管理
       {
         path: '/usermanage',
         name: 'usermanage',
@@ -283,73 +283,6 @@ export const asyncRouterMap = [
         ]
       }
 
-      // account
-      // {
-      //   path: '/account',
-      //   component: RouteView,
-      //   redirect: '/account/center',
-      //   name: 'account',
-      //   meta: { title: 'menu.account', icon: 'user', keepAlive: true, permission: ['user'] },
-      //   children: [
-      //     {
-      //       path: '/account/center',
-      //       name: 'center',
-      //       component: () => import('@/views/account/center'),
-      //       meta: { title: 'menu.account.center', keepAlive: true, permission: ['user'] }
-      //     },
-      //     {
-      //       path: '/account/settings',
-      //       name: 'settings',
-      //       component: () => import('@/views/account/settings/Index'),
-      //       meta: { title: 'menu.account.settings', hideHeader: true, permission: ['user'] },
-      //       redirect: '/account/settings/basic',
-      //       hideChildrenInMenu: true,
-      //       children: [
-      //         {
-      //           path: '/account/settings/basic',
-      //           name: 'BasicSettings',
-      //           component: () => import('@/views/account/settings/BasicSetting'),
-      //           meta: { title: 'account.settings.menuMap.basic', hidden: true, permission: ['user'] }
-      //         },
-      //         {
-      //           path: '/account/settings/security',
-      //           name: 'SecuritySettings',
-      //           component: () => import('@/views/account/settings/Security'),
-      //           meta: {
-      //             title: 'account.settings.menuMap.security',
-      //             hidden: true,
-      //             keepAlive: true,
-      //             permission: ['user']
-      //           }
-      //         },
-      //         {
-      //           path: '/account/settings/custom',
-      //           name: 'CustomSettings',
-      //           component: () => import('@/views/account/settings/Custom'),
-      //           meta: { title: 'account.settings.menuMap.custom', hidden: true, keepAlive: true, permission: ['user'] }
-      //         },
-      //         {
-      //           path: '/account/settings/binding',
-      //           name: 'BindingSettings',
-      //           component: () => import('@/views/account/settings/Binding'),
-      //           meta: { title: 'account.settings.menuMap.binding', hidden: true, keepAlive: true, permission: ['user'] }
-      //         },
-      //         {
-      //           path: '/account/settings/notification',
-      //           name: 'NotificationSettings',
-      //           component: () => import('@/views/account/settings/Notification'),
-      //           meta: {
-      //             title: 'account.settings.menuMap.notification',
-      //             hidden: true,
-      //             keepAlive: true,
-      //             permission: ['user']
-      //           }
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // }
-
       // other
       /*
       {
@@ -424,13 +357,13 @@ export const asyncRouterMap = [
     component: BasicLayout,
     redirect: '/account/settings',
     name: 'account',
-    meta: { title: '用户信息', icon: 'user', keepAlive: true, permission: ['user'] },
+    meta: { title: '用户信息', icon: 'user', keepAlive: true },
     children: [
       {
         path: '/account/settings',
         name: 'settings',
-        component: () => import('@/views/account/settings/Setting'),
-        meta: { title: '修改密码', hideHeader: true, permission: ['user'] }
+        component: () => import('@/views/account/Setting'),
+        meta: { title: '修改密码', hideHeader: true }
       }
     ]
   }

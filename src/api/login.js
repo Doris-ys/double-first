@@ -3,13 +3,10 @@ import request from '@/utils/request'
 const userApi = {
   Login: '/auth/login',
   Logout: '/auth/logout',
-  ForgePassword: '/auth/forge-password',
-  Register: '/auth/register',
-  twoStepCode: '/auth/2step-code',
   SendSms: '/account/sms',
-  SendSmsErr: '/account/sms_err',
   // get my info
   UserInfo: '/user/info',
+  UserEdit: '/user/edit',
   UserMenu: '/user/nav'
 }
 
@@ -32,14 +29,6 @@ export function login (parameter) {
   })
 }
 
-export function getSmsCaptcha (parameter) {
-  return request({
-    url: userApi.SendSms,
-    method: 'post',
-    data: parameter
-  })
-}
-
 export function getInfo () {
   return request({
     url: userApi.UserInfo,
@@ -47,6 +36,14 @@ export function getInfo () {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }
+  })
+}
+
+export function setInfo (parameter) {
+  return request({
+    url: userApi.UserEdit,
+    method: 'post',
+    data: parameter
   })
 }
 
@@ -74,6 +71,14 @@ export function logout () {
 export function get2step (parameter) {
   return request({
     url: userApi.twoStepCode,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function getSmsCaptcha (parameter) {
+  return request({
+    url: userApi.SendSms,
     method: 'post',
     data: parameter
   })

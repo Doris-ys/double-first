@@ -1,14 +1,13 @@
 import storage from 'store'
-import { login, getInfo, logout } from '@/api/login'
+import { login, getInfo, setInfo, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
 const user = {
   state: {
     token: '',
-    name: '',
+    userName: '',
     welcome: '',
-    avatar: '',
     roles: [],
     info: {}
   },
@@ -17,18 +16,18 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, { name, welcome }) => {
-      state.name = name
+    SET_NAME: (state, { userName, welcome }) => {
+      state.userName = userName
       state.welcome = welcome
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
     },
     SET_INFO: (state, info) => {
       state.info = info
+    },
+    EDIT_INFO: (state, info) => {
+      Object.assign(state.info, info)
     }
   },
 
@@ -69,9 +68,22 @@ const user = {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
 
-          commit('SET_NAME', { name: result.name, welcome: welcome() })
-          commit('SET_AVATAR', result.avatar)
+          commit('SET_NAME', { userName: result.userName, welcome: welcome() })
 
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+    // 修改用户信息
+    SetInfo ({ commit }, formData) {
+      return new Promise((resolve, reject) => {
+        setInfo(formData).then(response => {
+          commit('EDIT_INFO', formData)
+          console.log(formData.userName)
+          commit('SET_NAME', { userName: formData.userName, welcome: welcome() })
           resolve(response)
         }).catch(error => {
           reject(error)

@@ -5,7 +5,7 @@ const userApi = {
   Logout: '/auth/logout',
   // get my info
   UserInfo: '/user/info',
-  UserEdit: '/user/edit'
+  UserEdit: '/user/update'
 }
 
 /**
